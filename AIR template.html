@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <style>
+        .main {
+            height: 600px;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .box1 {
+            height: 100px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .boxleft {
+            height: 100%;
+            width: 20%;
+            align-content: center;
+        }
+
+        .boxright {
+            height: 100%;
+            width: 80%;
+            display: flex;
+            flex-wrap: wrap;
+            overflow-y: auto;
+        }
+
+        .filter-content {
+            display: none;
+            padding-left: 10px;
+            margin-bottom: 10px;
+        }
+
+        .filter-content.show {
+            display: block;
+        }
+
+        .box4 {
+            height: 50px;
+            width: 100%;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            box-sizing: border-box;
+            font-size: 16px;
+            text-align: left;
+            font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+                "Lucida Sans", Arial, sans-serif;
+            border-top: 1px solid rgb(187, 185, 185);
+        }
+
+        .box5 {
+            height: auto;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .box6 {
+            height: 50px;
+            width: 32%;
+            text-align: center;
+            font-size: small;
+            font-weight: bolder;
+            font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+                "Lucida Sans", Arial, sans-serif;
+        }
+
+        .card {
+            width: 30%;
+            border: 1px solid #ddd;
+            text-align: center;
+            margin: 10px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        h1 {
+            font-size: 15px;
+            margin-top: 10px;
+        }
+
+        input[type="button"] {
+            margin: 10px auto;
+            font-weight: bold;
+            background-color: #fff;
+            border: none;
+            font-family: Arial, Helvetica, sans-serif;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .category {
+            font-size: smaller;
+            color: red;
+        }
+
+        #toggleButton {
+            position: absolute;
+            top: 30px;
+            right: 20px;
+            padding: 10px;
+            background: none;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #genderOptions {
+            background-color: #fafafa;
+            padding: 10px;
+            border-left: 3px solid #ccc;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 5px 0;
+        }
+
+        .filter-section {
+            max-width: 300px;
+            margin: auto;
+        }
+
+        .btn[type="button"] {
+            height: 30px;
+            width: 35px;
+            background-color: #111;
+            color: #fff;
+            margin: 10px auto;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background-color: #e50914;
+            transform: scale(1.05);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .circle {
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            border: 1px solid gray;
+        }
+
+        .filter-buttons input {
+            margin: 5px;
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        var movielist = [
+            {
+                id: 1,
+                category: "Nike Air Max dn8",
+                title: "just in",
+                rate: "17495.00",
+                url: "./images/AIR1.png",
+                gender: "Male",
+                price: 2000.0,
+                size: "2.5",
+                color: "Black",
+                brand: "Nike Sportswear",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 2,
+                category: "Nike Air Max dn8",
+                title: "Bestseller",
+                rate: "17495.00",
+                url: "./images/AIR2.png",
+                gender: "Male",
+                price: 3000.0,
+                size: "2.5",
+                color: "Orange",
+                brand: "",
+                collection: "Air Max",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 3,
+                category: "Nike Air Max dn8",
+                title: "Bestseller",
+                rate: "17495.00",
+                url: "./images/AIR3.png",
+                gender: "Male",
+                price: 4000.0,
+                size: "2.5",
+                color: "Black",
+                brand: "Nike Sportswear",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 4,
+                category: "Nike Air Max dn8",
+                title: "Bestseller",
+                rate: "17495.00",
+                url: "./images/AIR4.png",
+                gender: "Male",
+                price: 2000.0,
+                size: "2.5",
+                color: "Orange",
+                brand: "",
+                collection: "",
+                ShoeHeight: "Low Top",
+                technology: "",
+            },
+            {
+                id: 5,
+                category: "Nike Air Max dn8",
+                title: "Bestseller",
+                rate: "17495.00",
+                url: "./images/AIR5.png",
+                gender: "Male",
+                price: 5000.0,
+                size: "2.5",
+                color: "Black",
+                brand: "Nike Sportswear",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 6,
+                category: "Nike Air Max dn8",
+                title: "Coming Soon",
+                rate: "17495.00",
+                url: "./images/AIR6.png",
+                gender: "Male",
+                price: 5000.0,
+                size: "2.5",
+                color: "Orange",
+                brand: "",
+                collection: "",
+                ShoeHeight: "Low Top",
+                technology: "",
+            },
+            {
+                id: 7,
+                category: "Nike Air Max dn8",
+                title: "Coming Soon",
+                rate: "17495.00",
+                url: "./images/AIR7.png",
+                gender: "Male",
+                price: 5000.0,
+                size: "2.5",
+                color: "Black",
+                brand: "Nike Sportswear",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 8,
+                category: "Nike Air Max dn8",
+                title: "Coming Soon",
+                rate: "17495.00",
+                url: "./images/AIR8.png",
+                gender: "Male",
+                price: 5000.0,
+                size: "2.5",
+                color: "Orange",
+                brand: "",
+                collection: "",
+                ShoeHeight: "Low Top",
+                technology: "",
+            },
+            {
+                id: 9,
+                category: "Nike Air Max dn8",
+                title: "Coming Soon",
+                rate: "17495.00",
+                url: "./images/AIR9.png",
+                gender: "Male",
+                price: 5000.0,
+                size: "2.5",
+                color: "Black",
+                brand: "",
+                collection: "Air Max",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 10,
+                category: "Nike Air Max dn",
+                title: "just in",
+                rate: "17495.00",
+                url: "./images/AIR10.png",
+                gender: "Male",
+                price: 5000.0,
+                size: "2.5",
+                color: "Orange",
+                brand: "Nike Sportswear",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 11,
+                category: "Nike Air Max dn",
+                title: "just in",
+                rate: "17495.00",
+                url: "./images/AIR11.png",
+                gender: "Male",
+                price: 10000.0,
+                size: "2.5",
+                color: "Black",
+                brand: "Nike Sportswear",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 12,
+                category: "Nike Air Max dn",
+                title: "just in",
+                rate: "17495.00",
+                url: "./images/AIR12.png",
+                gender: "Male",
+                price: 10000.0,
+                size: "3",
+                color: "Orange",
+                brand: "",
+                collection: "",
+                ShoeHeight: "Low Top",
+                technology: "",
+            },
+            {
+                id: 13,
+                category: "Nike Air Max dn",
+                title: "Bestseller",
+                rate: "17495.00",
+                url: "./images/AIR13.png",
+                gender: "Male",
+                price: 10000.0,
+                size: "3",
+                color: "Black",
+                brand: "Nike Sportswear",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 14,
+                category: "Nike Air Max dn",
+                title: "Bestseller",
+                rate: "17495.00",
+                url: "./images/AIR14.png",
+                gender: "Male",
+                price: 10000.0,
+                size: "3",
+                color: "Orange",
+                brand: "",
+                collection: "Air Max",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 15,
+                category: "Nike Air Max dn",
+                title: "Bestseller",
+                rate: "17495.00",
+                url: "./images/AIR15.png",
+                gender: "Male",
+                price: 10000.0,
+                size: "3",
+                color: "Black",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "Nike Air Max",
+            },
+            {
+                id: 16,
+                category: "Nike Air Max dn",
+                title: "Coming Soon",
+                rate: "17495.00",
+                url: "./images/AIR16.png",
+                gender: "Male",
+                price: 10000.0,
+                size: "3",
+                color: "Orange",
+                brand: "",
+                collection: "",
+                ShoeHeight: "Low Top",
+                technology: "",
+            },
+            {
+                id: 17,
+                category: "Nike Air Max dn",
+                title: "Coming Soon",
+                rate: "17495.00",
+                url: "./images/AIR17.png",
+                gender: "Male",
+                price: 10000.0,
+                size: "3",
+                color: "Black",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "Nike Air Max",
+            },
+            {
+                id: 18,
+                category: "Nike Air Max dn",
+                title: "Sustainable Materials",
+                rate: "17495.00",
+                url: "./images/AIR18.png",
+                gender: "Male",
+                price: 10000.0,
+                size: "3",
+                color: "Orange",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "Nike Air Max",
+            },
+            {
+                id: 19,
+                category: "Nike Air Max dn",
+                title: "Sustainable Materials",
+                rate: "17495.00",
+                url: "./images/AIR19.png",
+                gender: "Male",
+                price: 10000.0,
+                size: "3",
+                color: "Black",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "Nike Air Max",
+            },
+            {
+                id: 20,
+                category: "Nike Air Max dn",
+                title: "Sustainable Materials",
+                rate: "17495.00",
+                url: "./images/AIR20.png",
+                gender: "Male",
+                price: 10000.0,
+                size: "3",
+                color: "Orange",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "Nike Air Max",
+            },
+            {
+                id: 21,
+                category: "Nike Air Max dn",
+                title: "Sustainable Materials",
+                rate: "17495.00",
+                url: "./images/AIR21.png",
+                gender: "Female",
+                price: 15000.0,
+                size: "3.5",
+                color: "Black",
+                brand: "",
+                collection: "Air Max",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 22,
+                category: "Air Max 1",
+                title: "Available in SNKRS",
+                rate: "17495.00",
+                url: "./images/AIR22.png",
+                gender: "Female",
+                price: 15000.0,
+                size: "3.5",
+                color: "Orange",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "Nike Air Max",
+            },
+            {
+                id: 23,
+                category: "Air Max 1",
+                title: "Nike Air Max",
+                rate: "17495.00",
+                url: "./images/AIR23.png",
+                gender: "Female",
+                price: 15000.0,
+                size: "3.5",
+                color: "Black",
+                brand: "",
+                collection: "",
+                ShoeHeight: "Low Top",
+                technology: "",
+            },
+            {
+                id: 24,
+                category: "Air Max 1",
+                title: "Nike Air Max 1'86 OG G",
+                rate: "17495.00",
+                url: "./images/AIR24.png",
+                gender: "Female",
+                price: 15000.0,
+                size: "3.5",
+                color: "Orange",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "Nike Air Max",
+            },
+            {
+                id: 25,
+                category: "Air Max 1",
+                title: "Nike Air Max 1'86 OG",
+                rate: "17495.00",
+                url: "./images/AIR25.png",
+                gender: "Female",
+                price: 5000.0,
+                size: "3.5",
+                color: "Black",
+                brand: "",
+                collection: "",
+                ShoeHeight: "Low Top",
+                technology: "",
+            },
+            {
+                id: 26,
+                category: "Air Max 1",
+                title: "Available in SNKRS",
+                rate: "17495.00",
+                url: "./images/AIR26.png",
+                gender: "Female",
+                price: 15000.0,
+                size: "3.5",
+                color: "Orange",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 27,
+                category: "Air Max 1",
+                title: "Nike Air Max 1'86 OG",
+                rate: "17495.00",
+                url: "./images/AIR27.png",
+                gender: "Female",
+                price: 15000.0,
+                size: "4",
+                color: "Black",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 28,
+                category: "Air Max 1",
+                title: "Nike Air Max 1'86 OG",
+                rate: "17495.00",
+                url: "./images/AIR28.png",
+                gender: "Female",
+                price: 5000.0,
+                size: "4",
+                color: "White",
+                brand: "",
+                collection: "Air Max",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 29,
+                category: "Air Max 90 G",
+                title: "Nike Air Max 90 GORE-TEX",
+                rate: "17495.00",
+                url: "./images/AIR29.png",
+                gender: "Female",
+                price: 15000.0,
+                size: "4",
+                color: "Black",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 30,
+                category: "Air Max 90 G",
+                title: "Bestseller",
+                rate: "17495.00",
+                url: "./images/AIR30.png",
+                gender: "Female",
+                price: 15000.0,
+                size: "4",
+                color: "White",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 31,
+                category: "Air Max 90 G",
+                title: "Bestseller",
+                rate: "17495.00",
+                url: "./images/AIR31.png",
+                gender: "Female",
+                price: 20000.0,
+                size: "4.5",
+                color: "Gray",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 32,
+                category: "Air Max 90 G",
+                title: "Nike Air Max 90 Drift",
+                rate: "17495.00",
+                url: "./images/AIR32.png",
+                gender: "Female",
+                price: 20000.0,
+                size: "4.5",
+                color: "White",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 33,
+                category: "Air Max 90 G",
+                title: "Nike Air Max 90 G",
+                rate: "17495.00",
+                url: "./images/AIR33.png",
+                gender: "Female",
+                price: 20000.0,
+                size: "4.5",
+                color: "Gray",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 34,
+                category: "Air Max 90 G",
+                title: "Nike Air Max 90 Drift",
+                rate: "17495.00",
+                url: "./images/AIR34.png",
+                gender: "Female",
+                price: 20000.0,
+                size: "4.5",
+                color: "White",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 35,
+                category: "Air Max 90 G",
+                title: "Nike Air Max 90 GORE-TEX",
+                rate: "17495.00",
+                url: "./images/AIR35.png",
+                gender: "Female",
+                price: 20000.0,
+                size: "4.5",
+                color: "Gray",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 36,
+                category: "Air Max 90 G",
+                title: "Nike Air Max 90 G",
+                rate: "17495.00",
+                url: "./images/AIR36.png",
+                gender: "Female",
+                price: 20000.0,
+                size: "5",
+                color: "White",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 37,
+                category: "Air Max 95",
+                title: "Nike Air Max 95 SP",
+                rate: "17495.00",
+                url: "./images/AIR37.png",
+                gender: "Female",
+                price: 20000.0,
+                size: "5",
+                color: "Gray",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 38,
+                category: "Nike Air Max 97 By You",
+                title: "Customize",
+                rate: "17495.00",
+                url: "./images/AIR38.png",
+                gender: "Female",
+                price: 20000.0,
+                size: "5",
+                color: "White",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 39,
+                category: "Nike Air Max 97 By You",
+                title: "Customize",
+                rate: "17495.00",
+                url: "./images/AIR39.png",
+                gender: "Female",
+                price: 20000.0,
+                size: "5.5",
+                color: "Gray",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 40,
+                category: "Nike Air Max 97 By You",
+                title: "Customize",
+                rate: "17495.00",
+                url: "./images/AIR40.png",
+                gender: "Female",
+                price: 20000.0,
+                size: "5.5",
+                color: "White",
+                brand: "",
+                collection: "",
+                ShoeHeight: "Low Top",
+                technology: "",
+            },
+            {
+                id: 41,
+                category: "Nike Air Max 97 By You",
+                title: "Customize",
+                rate: "17495.00",
+                url: "./images/AIR41.png",
+                gender: "Unisex",
+                price: 25000.0,
+                size: "5.5",
+                color: "Gray",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 42,
+                category: "Nike Air Max 97 By You",
+                title: "Customize",
+                rate: "17495.00",
+                url: "./images/AIR42.png",
+                gender: "Unisex",
+                price: 25000.0,
+                size: "6",
+                color: "White",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 43,
+                category: "Nike Air Max 97 By You",
+                title: "Customize",
+                rate: "17495.00",
+                url: "./images/AIR43.png",
+                gender: "Unisex",
+                price: 25000.0,
+                size: "6",
+                color: "Gray",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 44,
+                category: "Nike Air Max 97 By You",
+                title: "Customize",
+                rate: "17495.00",
+                url: "./images/AIR44.png",
+                gender: "Unisex",
+                price: 25000.0,
+                size: "6",
+                color: "White",
+                brand: "",
+                collection: "Air Max",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 45,
+                category: "Air Max Plus",
+                title: "Nike Air Max",
+                rate: "17495.00",
+                url: "./images/AIR45.png",
+                gender: "Unisex",
+                price: 25000.0,
+                size: "6.5",
+                color: "Gray",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 46,
+                category: "Air Max Plus",
+                title: "Nike Air Max",
+                rate: "17495.00",
+                url: "./images/AIR46.png",
+                gender: "Unisex",
+                price: 25000.0,
+                size: "6.5",
+                color: "White",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 47,
+                category: "Air Max Plus",
+                title: "Nike Air Max",
+                rate: "17495.00",
+                url: "./images/AIR47.png",
+                gender: "Unisex",
+                price: 25000.0,
+                size: "6.5",
+                color: "Gray",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 48,
+                category: "Air Max Plus",
+                title: "Nike Air Max",
+                rate: "17495.00",
+                url: "./images/AIR48.png",
+                gender: "Unisex",
+                price: 25000.0,
+                size: "7",
+                color: "White",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 49,
+                category: "Air Max Plus",
+                title: "Nike Air Max",
+                rate: "17495.00",
+                url: "./images/AIR49.png",
+                gender: "Unisex",
+                price: 25000.0,
+                size: "7",
+                color: "Gray",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 50,
+                category: "Air Max Plus",
+                title: "Nike Air Max",
+                rate: "17495.00",
+                url: "./images/AIR50.png",
+                gender: "Unisex",
+                price: 25000.0,
+                size: "7",
+                color: "White",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 51,
+                category: "Air Max Plus",
+                title: "Nike Air Max",
+                rate: "17495.00",
+                url: "./images/AIR51.png",
+                gender: "Unisex",
+                price: 28000.0,
+                size: "7.5",
+                color: "Gray",
+                brand: "",
+                collection: "Air Max",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 52,
+                category: "Air Max Plus",
+                title: "Nike Air Max",
+                rate: "17495.00",
+                url: "./images/AIR52.png",
+                gender: "Unisex",
+                price: 28000.0,
+                size: "7.5",
+                color: "White",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 53,
+                category: "Air Max Plus",
+                title: "Nike Air Max",
+                rate: "17495.00",
+                url: "./images/AIR53.png",
+                gender: "Unisex",
+                price: 28000.0,
+                size: "7.5",
+                color: "Gray",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 54,
+                category: "Air Max Plus",
+                title: "Nike Air Max",
+                rate: "17495.00",
+                url: "./images/AIR54.png",
+                gender: "Unisex",
+                price: 28000.0,
+                size: "8",
+                color: "White",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 55,
+                category: "Air Max Plus",
+                title: "Nike Air Max",
+                rate: "17495.00",
+                url: "./images/AIR55.png",
+                gender: "Unisex",
+                price: 28000.0,
+                size: "8",
+                color: "Gray",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 56,
+                category: "Air Max Plus",
+                title: "Nike Air Max",
+                rate: "17495.00",
+                url: "./images/AIR56.png",
+                gender: "Unisex",
+                price: 28000.0,
+                size: "8.5",
+                color: "White",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 57,
+                category: "Air Max Plus",
+                title: "Nike Air Max",
+                rate: "17495.00",
+                url: "./images/AIR57.png",
+                gender: "Unisex",
+                price: 28000.0,
+                size: "8.5",
+                color: "Gray",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 58,
+                category: "Nike Air vapromax 2023 Flyknit",
+                title: "Sustainable Materials",
+                rate: "17495.00",
+                url: "./images/AIR58.png",
+                gender: "Unisex",
+                price: 28000.0,
+                size: "9",
+                color: "White",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 59,
+                category: "Nike Air vapromax 2023 Flyknit",
+                title: "Bestseller",
+                rate: "17495.00",
+                url: "./images/AIR59.png",
+                gender: "Unisex",
+                price: 28000.0,
+                size: "9.5",
+                color: "Gray",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 60,
+                category: "Nike Air vapromax 2023 Flyknit",
+                title: "Sustainable Materials",
+                rate: "17495.00",
+                url: "./images/AIR60.png",
+                gender: "Unisex",
+                price: 28000.0,
+                size: "10",
+                color: "White",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 61,
+                category: "Nike Air vapromax 2023 Flyknit",
+                title: "Sustainable Materials",
+                rate: "17495.00",
+                url: "./images/AIR61.png",
+                gender: "Unisex",
+                price: 28000.0,
+                size: "10",
+                color: "Orange",
+                brand: "",
+                collection: "Air Max",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 62,
+                category: "Nike Air vapromax 2023 Flyknit",
+                title: "Bestseller",
+                rate: "17495.00",
+                url: "./images/AIR62.png",
+                gender: "Unisex",
+                price: 28000.0,
+                size: "10",
+                color: "White",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+            {
+                id: 63,
+                category: "Nike Air vapromax 2023 Flyknit",
+                title: "Bestseller",
+                rate: "17495.00",
+                url: "./images/AIR63.png",
+                gender: "Unisex",
+                price: 28000.0,
+                size: "10",
+                color: "Orange",
+                brand: "",
+                collection: "",
+                ShoeHeight: "",
+                technology: "",
+            },
+        ];
+    </script>
+</head>
+
+<body>
+    <div class="main">
+        <div class="box1">
+            <button id="toggleButton" onclick="toggleVisibility()">
+                Hide Filters
+            </button>
+        </div>
+        <div class="boxleft">
+            <div id="resultCount" style="
+            margin-left: 70px;
+            font-weight: bold;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: navy;
+          "></div>
+            <div class="box3" style="margin-top: 15px">
+                <div class="filter-buttons">
+                    <input type="button" value="Air Max Dn8" onclick="show('Nike Air Max dn8')" /><br />
+                    <input type="button" value="Air Max Dn" onclick="show('Nike Air Max dn')" /><br />
+                    <input type="button" value="Air Max 1" onclick="show('Air Max 1')" /><br />
+                    <input type="button" value="Air Max 90" onclick="show('Air Max 90 G')" /><br />
+                    <input type="button" value="Air Max 95" onclick="show('Air Max 95')" /><br />
+                    <input type="button" value="Air Max 97" onclick="show('Nike Air Max 97 By You')" /><br />
+                    <input type="button" value="Air Max Plus" onclick="show('Air Max Plus')" /><br />
+                    <input type="button" value="Vapor Max" onclick="show('Nike Air vapromax 2023 Flyknit')" /><br />
+                    <input type="button" value="All" onclick="show('All')" /><br />
+                </div>
+                <div class="filter-section">
+                    <!-- Gender Filter Section -->
+                    <div class="box4" onclick="toggleSection(this)">
+                        Gender (3)
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="filter-content" id="genderOptions">
+                        <label><input type="checkbox" name="gender" value="Male" onchange="filterByGender()" />
+                            Male</label>
+                        <label><input type="checkbox" name="gender" value="Female" onchange="filterByGender()" />
+                            Female</label>
+                        <label><input type="checkbox" name="gender" value="Unisex" onchange="filterByGender()" />
+                            Unisex</label>
+                    </div>
+                    <!-- Shop By Price Filter Section -->
+                    <div class="box4" onclick="toggleSection(this)">
+                        Shop By Price
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="filter-content" id="priceOptions">
+                        <h3>Price</h3>
+                        <label><input type="checkbox" class="price-filter" value="0-5000" />
+                            Under $5000</label>
+                        <label><input type="checkbox" class="price-filter" value="5000-10000" />
+                            $5000 - $10000</label>
+                        <label><input type="checkbox" class="price-filter" value="10000-15000" />
+                            $10000 - $15000</label>
+                        <label><input type="checkbox" class="price-filter" value="15000-20000" />
+                            $15000 - $20000</label>
+                        <label><input type="checkbox" class="price-filter" value="20000-28000" />
+                            $20000 - $28000</label>
+                        <label><input type="checkbox" class="price-filter" value="28000+" />
+                            Over $28000</label>
+                    </div>
+                    <!-- Size Filter Section -->
+                    <div class="box4" onclick="toggleSection(this)">
+                        Size
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="filter-content" id="sizeOptions">
+                        <input type="button" class="btn" value="2.5" onclick="showBySize('2.5')" />
+                        <input type="button" class="btn" value="3" onclick="showBySize('3')" />
+                        <input type="button" class="btn" value="3.5" onclick="showBySize('3.5')" /><br />
+                        <input type="button" class="btn" value="4" onclick="showBySize('4')" />
+                        <input type="button" class="btn" value="4.5" onclick="showBySize('4.5')" />
+                        <input type="button" class="btn" value="5" onclick="showBySize('5')" /><br />
+                        <input type="button" class="btn" value="5.5" onclick="showBySize('5.5')" />
+                        <input type="button" class="btn" value="6" onclick="showBySize('6')" />
+                        <input type="button" class="btn" value="6.5" onclick="showBySize('6.5')" /><br />
+                        <input type="button" class="btn" value="7" onclick="showBySize('7')" />
+                        <input type="button" class="btn" value="7.5" onclick="showBySize('7.5')" />
+                        <input type="button" class="btn" value="8" onclick="showBySize('8')" /><br />
+                        <input type="button" class="btn" value="8.5" onclick="showBySize('8.5')" />
+                        <input type="button" class="btn" value="9" onclick="showBySize('9')" />
+                        <input type="button" class="btn" value="9.5" onclick="showBySize('9.5')" /><br />
+                        <input type="button" class="btn" value="10" onclick="showBySize('10')" />
+                        <input type="button" class="btn" value="All" onclick="showBySize('All')"
+                            style="width: 70px" /><br />
+                    </div>
+                    <!-- Collection Filter Section -->
+                    <div class="box4" onclick="toggleSection(this)">
+                        Collection
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="filter-content" id="ColectionOptions">
+                        <label><input type="checkbox" name="collection" value="Air Max"
+                                onchange="filterByCollection()" />
+                            Air Max</label><br />
+                    </div>
+                    <!-- Shoe Height Filter Section -->
+                    <div class="box4" onclick="toggleSection(this)">
+                        Shoe Height
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="filter-content" id="ShoeHeightOptions">
+                        <label><input type="checkbox" name="ShoeHeight" value="Low Top"
+                                onchange="filterByShoeHeight()" />
+                            Low Top</label>
+                    </div>
+                    <!-- Air Max Filter Section -->
+                    <div class="box4" onclick="toggleSection(this)">
+                        Air Max
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="filter-content" id="airmaxOptions">
+                        <label><input type="checkbox" name="Nike Air Max dn8" value="Nike Air Max dn8"
+                                onchange="filterByCategory()" />
+                            Air Max dn8</label>
+                        <label><input type="checkbox" name="Air Max Plus" value="Air Max Plus"
+                                onchange="filterByCategory()" />
+                            Air Max Plus</label>
+                        <label><input type="checkbox" name="Air Max 1" value="Air Max 1"
+                                onchange="filterByCategory()" />
+                            Air Max 1</label>
+                        <label><input type="checkbox" name="Air Max 90" value="Air Max 90 G"
+                                onchange="filterByCategory()" />
+                            Air Max 90</label>
+                        <label><input type="checkbox" name="Air Max 97" value="Nike Air Max 97 By You"
+                                onchange="filterByCategory()" />
+                            Air Max 97</label>
+                        <label><input type="checkbox" name="Vapor Max" value="Nike Air vapromax 2023 Flyknit"
+                                onchange="filterByCategory()" />
+                            Vapor Max</label>
+                    </div>
+                    <!-- Brand Filter Section -->
+                    <div class="box4" onclick="toggleSection(this)">
+                        Brand
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="filter-content" id="brandOptions">
+                        <label><input type="checkbox" name="brand" value="Nike Sportswear" onchange="filterByBrand()" />
+                            Nike Sportswear</label>
+                    </div>
+                    <!-- Technology Filter Section -->
+                    <div class="box4" onclick="toggleSection(this)">
+                        Technology
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="filter-content" id="technologyOptions">
+                        <label><input type="checkbox" name="technology" value="Nike Air Max"
+                                onchange="filterByTechnology()" />
+                            Nike Air Max</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="boxright" id="mintu"></div>
+    </div>
+
+    <script>
+        function toggleSection(header) {
+            const next = header.nextElementSibling;
+            if (next && next.classList.contains("filter-content")) {
+                next.classList.toggle("show");
+                const icon = header.querySelector("i");
+                if (icon.classList.contains("fa-angle-down")) {
+                    icon.classList.remove("fa-angle-down");
+                    icon.classList.add("fa-angle-up");
+                } else {
+                    icon.classList.remove("fa-angle-up");
+                    icon.classList.add("fa-angle-down");
+                }
+            }
+        }
+
+        let selectedCategories = [];
+        let selectedSize = "All";
+        let selectedBrand = [];
+        let selectedTechnology = [];
+        let selectedShoeHeight = [];
+        let selectedCollection = [];
+        let selectedGenders = [];
+        let selectedPrices = [];
+
+        function show(category) {
+            selectedCategories = category === "All" ? [] : [category];
+            filterAndDisplay();
+        }
+
+        function showBySize(size) {
+            selectedSize = size === "All" ? "All" : size;
+            filterAndDisplay();
+        }
+
+        function filterByCategory() {
+            const checkboxes = document.querySelectorAll(
+                '#airmaxOptions input[type="checkbox"]:checked'
+            );
+            selectedCategories = Array.from(checkboxes).map((cb) => cb.value);
+            filterAndDisplay();
+        }
+
+        function filterByGender() {
+            const checkboxes = document.querySelectorAll(
+                'input[name="gender"]:checked'
+            );
+            selectedGenders = Array.from(checkboxes).map((cb) => cb.value);
+            filterAndDisplay();
+        }
+
+        function filterByShoeHeight() {
+            const checkboxes = document.querySelectorAll(
+                'input[name="ShoeHeight"]:checked'
+            );
+            selectedShoeHeight = Array.from(checkboxes).map((cb) =>
+                cb.value.toLowerCase().trim()
+            );
+            filterAndDisplay();
+        }
+
+        function filterByCollection() {
+            const checkboxes = document.querySelectorAll(
+                'input[name="collection"]:checked'
+            );
+            selectedCollection = Array.from(checkboxes).map((cb) => cb.value);
+            filterAndDisplay();
+        }
+
+        function filterByBrand() {
+            const checkboxes = document.querySelectorAll(
+                '#brandOptions input[type="checkbox"]:checked'
+            );
+            selectedBrand = Array.from(checkboxes).map((cb) =>
+                cb.value.toLowerCase()
+            );
+            filterAndDisplay();
+        }
+
+        function filterByTechnology() {
+            const checkboxes = document.querySelectorAll(
+                '#technologyOptions input[type="checkbox"]:checked'
+            );
+            selectedTechnology = Array.from(checkboxes).map((cb) =>
+                cb.value.toLowerCase()
+            );
+            filterAndDisplay();
+        }
+
+        function filterByPrice() {
+            const checkboxes = document.querySelectorAll(
+                "input.price-filter:checked"
+            );
+            selectedPrices = Array.from(checkboxes).map((cb) => cb.value);
+            filterAndDisplay();
+        }
+
+        function filterAndDisplay() {
+            const container = document.querySelector(".boxright");
+            const resultCountEl = document.getElementById("resultCount");
+            container.innerHTML = "";
+
+            const filtered = movielist.filter((item) => {
+                const matchCategory =
+                    selectedCategories.length === 0 ||
+                    selectedCategories.includes(item.category);
+                const matchSize =
+                    selectedSize === "All" || item.size === selectedSize;
+                const matchGender =
+                    selectedGenders.length === 0 ||
+                    selectedGenders.includes(item.gender);
+                const matchCollection =
+                    selectedCollection.length === 0 ||
+                    selectedCollection.includes(item.collection || "");
+                const matchShoeHeight =
+                    selectedShoeHeight.length === 0 ||
+                    selectedShoeHeight.includes((item.ShoeHeight || "").toLowerCase());
+                const matchBrand =
+                    selectedBrand.length === 0 ||
+                    selectedBrand.includes((item.brand || "").toLowerCase());
+                const matchTechnology =
+                    selectedTechnology.length === 0 ||
+                    selectedTechnology.includes((item.technology || "").toLowerCase());
+                const matchPrice =
+                    selectedPrices.length === 0 ||
+                    selectedPrices.some((priceRange) => {
+                        const [minStr, maxStr] = priceRange.split("-");
+                        const min = Number(minStr);
+                        const max = maxStr === "+" ? Infinity : Number(maxStr);
+                        return item.price >= min && item.price <= max;
+                    });
+                return (
+                    matchCategory &&
+                    matchGender &&
+                    matchPrice &&
+                    matchSize &&
+                    matchCollection &&
+                    matchShoeHeight &&
+                    matchBrand &&
+                    matchTechnology
+                );
+            });
+
+            if (resultCountEl) {
+                resultCountEl.textContent = `Showing ${filtered.length} result${filtered.length !== 1 ? "s" : ""
+                    }`;
+            }
+
+            filtered.forEach((item) => {
+                const card = `
+                    <div class="card">
+                        <img src="${item.url}" />
+                        <h1>${item.category}</h1>
+                        <div class="category">${item.title}</div>
+                        <h3>₹${item.price.toFixed(2)}</h3>
+                        <p>Size ${item.size} | Gender ${item.gender}</p>
+                        <h4>${item.collection || "N/A"}</h4>
+                        <h4>${item.ShoeHeight || "N/A"} | Brand ${item.brand || "N/A"
+                    }</h4>
+                        <i>Technology ${item.technology || "N/A"}</i>
+                    </div>`;
+                container.innerHTML += card;
+            });
+        }
+
+        window.onload = () => filterAndDisplay();
+
+        document
+            .querySelectorAll(".price-filter")
+            .forEach((cb) => cb.addEventListener("change", filterByPrice));
+
+        function toggleVisibility() {
+            const boxLeft = document.querySelector(".boxleft");
+            const btn = document.getElementById("toggleButton");
+            if (boxLeft.style.display === "none") {
+                boxLeft.style.display = "block";
+                btn.textContent = "Hide Filters";
+            } else {
+                boxLeft.style.display = "none";
+
+                btn.textContent = "Show Filters";
+            }
+        }
+        show("All");
+    </script>
+</body>
+
+</html>
